@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError, throwError } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -7,13 +8,17 @@ export class AccountService {
   prefixURL = "/api"
   constructor(private http: HttpClient) { }
   signUp(credentials: Object) {
-    console.log(credentials)
-    return this.http.post(this.prefixURL + "/sign-up", credentials);
+    return this.http.post(this.prefixURL + "/sign-up", credentials).pipe(catchError(this.handleError));
   }
   logIn(credentials: Object) {
-    return this.http.post(this.prefixURL + "/log-in", credentials);
+    return this.http.post(this.prefixURL + "/log-in", credentials).pipe(catchError(this.handleError));;
   }
   isLoggedIn() {
     return (localStorage.getItem("user") ? true : false)
+  }
+  private handleError(error: HttpErrorResponse) {
+    
+    return throwError( () =>
+      error);
   }
 }

@@ -86,25 +86,34 @@ passport.use(
 // })
 
 app.post("/api/sign-up", (req, res, next) => {
-    bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
-        // if err, do something
-        if (err)
-            return console.log(err)
-        // otherwise, store hashedPassword in DB
-        const user = new User({
-            username: req.body.email,
-            password: hashedPassword,
-            fullName: req.body.fName + " " + req.body.lName,
-            firstName: req.body.fName,
-            lastName: req.body.lName,
-            membershipStatus: 'noob'
-          }).save(err => {
-            if (err) { 
-              return next(err);
-            }
-            res.status(200).json({success: true})
-          });
-  });
+    User.findOne({username: req.body.username}, (err,user) => {
+      if (err) return next(err)
+      if (user) {
+        res.status(303).json({success: false, message: "User already exists"})
+      }
+      else {
+        bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
+          // if err, do something
+          if (err)
+              return console.log(err)
+          // otherwise, store hashedPassword in DB
+          const user = new User({
+              username: req.body.username,
+              password: hashedPassword,
+              fullName: req.body.fName + " " + req.body.lName,
+              firstName: req.body.fName,
+              lastName: req.body.lName,
+              membershipStatus: 'noob'
+            }).save(err => {
+              if (err) { 
+                return next(err);
+              }
+              res.status(200).json({success: true})
+            });
+    });
+      }
+    })
+    
 });
     
 app.post('/api/log-in', 

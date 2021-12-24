@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { Router, RouterModule } from '@angular/router';
@@ -24,6 +24,7 @@ import { AuthGuard } from './services/auth.guard';
   imports: [
     BrowserModule,
     HttpClientModule,
+    ReactiveFormsModule,
     FormsModule,
     RouterModule.forRoot([
       {path: "home", component: HomeComponent, canActivate: [AuthGuard]},
