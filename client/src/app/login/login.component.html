@@ -1,0 +1,20 @@
+<mat-card id="login-box">
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" method="post">
+        <mat-form-field class="formInput" appearance="fill">
+            <mat-label>Email Address</mat-label>
+            <input type="text" #username="ngModel" minlength="4" maxlength="32" required name="username" [(ngModel)]="user.username" matInput>
+          </mat-form-field>
+          <div *ngIf="username.invalid && (username.dirty || username.touched)"
+    class="alert"> Invalid Username</div>
+
+          <mat-form-field class="formInput" appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput name="password" minlength="6" maxlength="24" required [(ngModel)]="user.password" type="password">
+          </mat-form-field>
+          <div id="login-button">
+            <button mat-button>Login</button>
+          </div>
+    </form>
+</mat-card>
+
+<a routerLink="/sign-up">Sign up here</a>

@@ -1,0 +1,18 @@
+@import "../assets/_variables.scss";
+
+#navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#title {
+    color: $accent;
+    text-align: center;
+    font-size: 2em;
+    font-family: $font;
+}
+p {
+    font-family: $font;
+}
+#log-out {
+}

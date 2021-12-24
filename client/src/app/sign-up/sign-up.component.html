@@ -1,0 +1,31 @@
+<h1>Sign up here</h1>
+<mat-card id="login-box">
+
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" method="post">
+        <mat-form-field class="formInput" appearance="fill">
+            <mat-label>First Name</mat-label>
+            <input type="text" #fname="ngModel" minlength="2" required name="fName" [(ngModel)]="user.fName" matInput>
+          </mat-form-field>
+          <div *ngIf="fname.errors?.['required']">
+            Name is required.
+          </div>
+          <!-- <div *ngIf="username.invalid && (username.dirty || username.touched)"
+    class="alert"> Invalid Username</div> -->
+
+          <mat-form-field class="formInput" appearance="fill">
+            <mat-label>Last name</mat-label>
+            <input matInput minlength="2" required name="lName" [(ngModel)]="user.lName" type="lName">
+          </mat-form-field>
+          <mat-form-field class="formInput" appearance="fill">
+            <mat-label>Email Address</mat-label>
+            <input matInput name="email" minlength="4" maxlength="32" required [(ngModel)]="user.email" type="email">
+          </mat-form-field>
+          <mat-form-field class="formInput" appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput name="password" minlength="6" maxlength="24" required [(ngModel)]="user.password" type="password">
+          </mat-form-field>
+          <div id="login-button">
+            <button mat-button>Sign-Up</button>
+          </div>
+    </form>
+</mat-card>

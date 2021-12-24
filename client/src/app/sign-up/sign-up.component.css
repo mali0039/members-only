@@ -1,0 +1,26 @@
+#login-box {
+    width: 40%;
+    margin: 0 auto;
+    margin-top: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+h1 {
+    margin: 0 auto;
+    font-size: 3em;
+    font-weight: bold;
+    margin-top: 50px;
+    text-align: center;
+}
+mat-form-field {
+    display: block;
+}
+input {
+    margin: 0 auto;
+}
+#login-button {
+    text-align: center;
+    margin: 0 auto;
+}
