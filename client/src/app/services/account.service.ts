@@ -16,6 +16,9 @@ export class AccountService {
   isLoggedIn() {
     return (localStorage.getItem("user") ? true : false)
   }
+  logOut() {
+    localStorage.removeItem("user");
+  }
   private handleError(error: HttpErrorResponse) {
     
     return throwError( () =>

@@ -1,7 +1,9 @@
 <mat-toolbar>
     <mat-toolbar-row id="navbar">
         <span id="title">Members Only</span>
-        <span id="log-out">Log Out</span>
+        <span *ngIf="accService.isLoggedIn()" (click) = "accService.logOut()" class="log">Log Out</span>
+        <span routerLink="log-in" *ngIf="!accService.isLoggedIn()" class="log">Log In</span>
+
     </mat-toolbar-row>
  
 </mat-toolbar>

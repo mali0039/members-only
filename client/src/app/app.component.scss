@@ -3,7 +3,7 @@
 #navbar {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }
 #title {
     color: $accent;
@@ -14,5 +14,9 @@
 p {
     font-family: $font;
 }
-#log-out {
+.log {
+    cursor: pointer;
+}
+.log:hover {
+    color: $primary;
 }
