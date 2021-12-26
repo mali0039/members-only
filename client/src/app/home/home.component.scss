@@ -1,3 +1,5 @@
+@import "/Users/mustafaali/Desktop/Angular/members-only/client/src/assets/_variables.scss";
+
 mat-card {
     margin: 10px auto 10px auto;
     width: 400px;
@@ -7,4 +9,12 @@ mat-card {
 
 mat-card-title {
     text-align: center;
+}
+#create-post {
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 20px;
+    display: block;
+    background-color: $accent;
+    color: black;
 }

@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     if (this.user.valid) {
       this.accService.logIn(this.user.value).subscribe((res:any) => {
         if (res['success']) {
-          localStorage.setItem('user', (this.user.get('username')?.toString() || ""));
+          this.accService.setUsername(this.user.get("username")?.value)
           this.router.navigate(['/'])
         }
         else {

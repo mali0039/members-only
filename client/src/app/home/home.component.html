@@ -1,36 +1,5 @@
+<button *ngIf="accService.isLoggedIn()" id="create-post" (click)="openDialog()" mat-button>Create Post</button>
 
-<mat-card>
-    <mat-card-title>Anonymous</mat-card-title>
-    <mat-card-content>Welcome to the club.</mat-card-content>
-    <mat-card-actions></mat-card-actions>
-</mat-card>
-
-<mat-card>
-    <mat-card-title>Anonymous</mat-card-title>
-    <mat-card-content>Welcome to the club.</mat-card-content>
-    <mat-card-actions></mat-card-actions>
-</mat-card>
-
-<mat-card>
-    <mat-card-title>Anonymous</mat-card-title>
-    <mat-card-content>Welcome to the club.</mat-card-content>
-    <mat-card-actions></mat-card-actions>
-</mat-card>
-
-<mat-card>
-    <mat-card-title>Anonymous</mat-card-title>
-    <mat-card-content>Welcome to the club.</mat-card-content>
-    <mat-card-actions></mat-card-actions>
-</mat-card>
-
-<mat-card>
-    <mat-card-title>Anonymous</mat-card-title>
-    <mat-card-content>Welcome to the club.</mat-card-content>
-    <mat-card-actions></mat-card-actions>
-</mat-card>
-
-<mat-card>
-    <mat-card-title>Anonymous</mat-card-title>
-    <mat-card-content>Welcome to the club.</mat-card-content>
-    <mat-card-actions></mat-card-actions>
-</mat-card>
+<div *ngFor="let message of allMessages">
+    <app-post [username]="'Anonymous'" [message]="message.text"></app-post>
+</div>

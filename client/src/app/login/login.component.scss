@@ -1,3 +1,5 @@
+@import "/Users/mustafaali/Desktop/Angular/members-only/client/src/assets/_variables.scss";
+
 #login-box {
     width: 40%;
     margin: 0 auto;
@@ -18,7 +20,24 @@ mat-form-field {
 input {
     margin: 0 auto;
 }
-#login-button {
+#login-button-box {
     text-align: center;
     margin: 0 auto;
 }
+#login-button {
+    background-color: $primary;
+}
+
+#sign-up {
+    text-align: center;
+    margin-top: 20px;
+}
+#hacker-icon {
+    width: 50px;
+    margin: 0 auto;
+    display: block;
+}
+a { color: $accent } 
+
+a:visited { text-decoration: none; color:$accent; }
+a:hover, a:active { text-decoration: none; color:black }

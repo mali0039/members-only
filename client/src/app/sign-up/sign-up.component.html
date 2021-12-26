@@ -3,6 +3,8 @@
 
 <mat-card id="login-box">
     <form [formGroup]="user" (ngSubmit)="onSubmit()" method="post">
+      <img id="hacker-icon" src="../assets/hacker_icon.png" alt="">
+
         <mat-form-field class="formInput" appearance="fill">
             <mat-label>First Name</mat-label>
             <input type="text" formControlName="fName"  minlength="2" required name="fName"  matInput>
@@ -21,8 +23,8 @@
             <input matInput name="password" formControlName="password" minlength="6" maxlength="24" required  type="password">
           </mat-form-field>
 
-          <div id="login-button">
-            <button mat-button>Sign-Up</button>
+          <div id="login-button-box">
+            <button id="login-button" mat-button>Sign-Up</button>
           </div>
     </form>
 </mat-card>

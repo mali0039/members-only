@@ -1,6 +1,8 @@
 <h3 *ngIf="notValid" id="error-message">{{errorMessage}}</h3>
 <mat-card id="login-box">
     <form [formGroup]="user" (ngSubmit)="onSubmit()" method="post">
+      <img id="hacker-icon" src="../assets/hacker_icon.png" alt="">
+
         <mat-form-field class="formInput" appearance="fill">
             <mat-label>Username</mat-label>
             <input type="text" autofocus minlength="4" maxlength="32" required name="username" formControlName="username" matInput>
@@ -10,9 +12,14 @@
             <mat-label>Password</mat-label>
             <input matInput name="password" minlength="6" maxlength="24" required formControlName="password" type="password">
           </mat-form-field>
-          <div id="login-button">
-            <button mat-button>Login</button>
+          <div id="login-button-box">
+            <button id="login-button" mat-button>Login</button>
           </div>
+          <div id="sign-up">
+            <p>New to Members Only?</p>
+            <p>Sign up <a routerLink="/sign-up">here</a> </p>
+          </div>
+
     </form>
 </mat-card>
 

@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Enter a message</h1>
+<div mat-dialog-content>
+  <p>Enter a message</p>
+  <mat-form-field class="formInput" appearance="fill">
+    <mat-label>Message</mat-label>
+    <input type="text" autofocus minlength="4" maxlength="32" required name="username" [(ngModel)]="data.message" matInput>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data.message" >Ok</button>
+</div>

@@ -115,12 +115,35 @@ app.post("/api/sign-up", (req, res, next) => {
     })
     
 });
-    
+app.get('/api/messages', (req,res,next) => {
+  Post.find({}, (err, posts) => {
+    if (err) return next(err)
+    res.status(200).json({messages: posts, success: true })
+  })
+})  
+app.post('/api/message', (req,res,next) => {
+  console.log(req.body)
+  User.findOne({username: req.body.username}, (err,user) => {
+    if (err) return next(err)
+      if (user) {
+        const post = new Post({
+          text: req.body.message,
+          createdBy: user._id
+        }).save((err,post) => {
+          if (err) {
+            return next(err);
+          }
+          res.status(201).json({success: true, post: post})
+        })
+      }
+  })
+})
 app.post('/api/log-in', 
   passport.authenticate('local'),
   function(req, res) {
     res.status(200).json({success: true})
   });
+
 // app.get("/log-out", (req, res) => {
 //     req.logout();
 //     res.redirect("/");
