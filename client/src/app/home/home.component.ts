@@ -15,10 +15,14 @@ export interface DialogData {
 })
 export class HomeComponent implements OnInit {
   message!: string;
+  statusChanged = false;
   allMessages!: any
   constructor(public dialog: MatDialog, private messageService: MessageService, public accService: AccountService) { }
 
   ngOnInit(): void {
+    this.getMessages();
+  }
+  getMessages() {
     this.messageService.getMessages().subscribe((res:any) => {
       console.log(res)
       res.messages.forEach((message:any) => {
@@ -35,6 +39,15 @@ export class HomeComponent implements OnInit {
     console.log(this.allMessages)
     this.allMessages.splice(index, 1)
     console.log(this.allMessages)
+  }
+  becomeMember() {
+    this.accService.changeMembership(localStorage.getItem("user") || "").subscribe((res) => {
+      console.log("Membership changed.")
+      localStorage.setItem('role', 'member');
+      this.getMessages();
+      this.statusChanged = true;
+      setTimeout((() => this.statusChanged = false), 3000);
+    })
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(MessageDialog, {

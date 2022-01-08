@@ -30,6 +30,9 @@ export class AccountService {
     console.log(role);
     localStorage.setItem("role", role);
   }
+  changeMembership(user: string) {
+    return this.http.post(this.prefixURL + "/member", {user}).pipe(catchError(this.handleError));
+  }
   getRole() {
     return localStorage.getItem("role") || "";
   }

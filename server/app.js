@@ -163,6 +163,13 @@ app.post("/api/log-out", (req, res) => {
     console.log("logging out")
     res.status(205)
 });
+app.post("/api/member", (req,res,next) => {
+  const username = req.body.user;
+  User.findOneAndUpdate({username}, {membershipStatus: 'member'}, (err, result) => {
+    if (err) return next(err);
+    res.status(204).json({success: true, status: "updated"})
+  })
+})
 const PORT = process.env.PORT || 3000
 app.listen((PORT), () => console.log("app listening on port " + PORT));
 
