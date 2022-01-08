@@ -116,13 +116,19 @@ app.post("/api/sign-up", (req, res, next) => {
     
 });
 app.get('/api/messages', (req,res,next) => {
-  Post.find({}, (err, posts) => {
-    if (err) return next(err)
+  Post.find().populate("createdBy", "username").exec((err, posts) => {
+    if (err) return next(err);
+    console.log(req.query.status)
+    if (req.query.status == 'noob' || req.query.status == "") {
+      posts.forEach((post) => {
+        post.createdBy.username = "Anonymous"
+      })
+    }
+
     res.status(200).json({messages: posts, success: true })
   })
 })  
 app.post('/api/message', (req,res,next) => {
-  console.log(req.body)
   User.findOne({username: req.body.username}, (err,user) => {
     if (err) return next(err)
       if (user) {
@@ -140,14 +146,23 @@ app.post('/api/message', (req,res,next) => {
 })
 app.post('/api/log-in', 
   passport.authenticate('local'),
-  function(req, res) {
-    res.status(200).json({success: true})
+  function(req, res, user) {
+    res.status(200).json({success: true, user: req.user.username, status: req.user.membershipStatus})
   });
 
-// app.get("/log-out", (req, res) => {
-//     req.logout();
-//     res.redirect("/");
-// });
+  app.delete('/api/message', (req,res, next) => {
+    console.log("hit delete")
+    console.log(req.body.id)
+    Post.deleteOne({_id: req.body.id}, (err, result) => {
+      if (err) return next(err)
+      res.status(200).json({success: true, result})
+    })
+  })
+app.post("/api/log-out", (req, res) => {
+    req.logout();
+    console.log("logging out")
+    res.status(205)
+});
 const PORT = process.env.PORT || 3000
 app.listen((PORT), () => console.log("app listening on port " + PORT));
 

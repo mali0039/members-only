@@ -19,10 +19,22 @@ export class HomeComponent implements OnInit {
   constructor(public dialog: MatDialog, private messageService: MessageService, public accService: AccountService) { }
 
   ngOnInit(): void {
-    this.messageService.getMessages().subscribe((messages:any) => {
-      console.log(messages)
-      this.allMessages = messages.messages
+    this.messageService.getMessages().subscribe((res:any) => {
+      console.log(res)
+      res.messages.forEach((message:any) => {
+        let date = new Date(message.timestamp)
+        console.log(date.toLocaleDateString())
+        message.timestamp = date.toLocaleDateString() + " - " + date.toLocaleTimeString()
+      })
+      this.allMessages = res.messages
     })
+  }
+  deletePost(event:String) {
+    let index = this.allMessages.findIndex((ele:any) => ele._id == event)
+    console.log(index)
+    console.log(this.allMessages)
+    this.allMessages.splice(index, 1)
+    console.log(this.allMessages)
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(MessageDialog, {
@@ -32,12 +44,18 @@ export class HomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+
       this.message = result;
-      if (this.accService.isLoggedIn()) {
+      if (this.accService.isLoggedIn() && this.message) {
         this.messageService.postMessage(this.accService.getUsername(), this.message).subscribe((res:any) => {
+          res.post.createdBy = { username: this.accService.getUsername()}
+          let date = new Date(res.post.timestamp)
+          res.post.timestamp = date.toLocaleDateString() + " - " + date.toLocaleTimeString()
           this.allMessages.push(res.post)
+          console.log(res.post)
         })
       }
+      this.message = ""
       
     });
   }

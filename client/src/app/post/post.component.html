@@ -1,5 +1,10 @@
 <mat-card>
-    <mat-card-title>{{username}}</mat-card-title>
-    <mat-card-content>{{message}}</mat-card-content>
-    <mat-card-actions></mat-card-actions>
+    <mat-card-subtitle>{{username}}</mat-card-subtitle>
+    <mat-card-content> 
+        <div id="message"><h1>{{message}}</h1></div>
+        <div id="date"><p>{{date}}</p></div>
+    </mat-card-content>
+    <mat-card-actions *ngIf="this.accService.getRole() == 'admin'" align="end">
+        <button (click) ="deletePost()" mat-button>Delete</button>
+    </mat-card-actions>
 </mat-card>

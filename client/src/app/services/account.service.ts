@@ -19,13 +19,22 @@ export class AccountService {
   }
   logOut() {
     localStorage.removeItem("user");
-    this.router.navigate(['/home'])
+    localStorage.removeItem("role");
+    console.log("logging out")
+    return this.http.post(this.prefixURL + "/log-out", {}).pipe(catchError(this.handleError));;
   }
   setUsername(username: string) {
     localStorage.setItem("user", username)
   }
+  setRole(role: string) {
+    console.log(role);
+    localStorage.setItem("role", role);
+  }
+  getRole() {
+    return localStorage.getItem("role") || "";
+  }
   getUsername() {
-    return localStorage.getItem("user") || ""
+    return localStorage.getItem("user") || "";
   }
   private handleError(error: HttpErrorResponse) {
     

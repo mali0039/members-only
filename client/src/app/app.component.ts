@@ -9,4 +9,10 @@ import { AccountService } from './services/account.service';
 export class AppComponent {
   title = 'members-only';
   constructor(public accService : AccountService){}
+
+  logOut() {
+    this.accService.logOut().subscribe((res) => {
+      console.log(res)
+    })
+  }
 }

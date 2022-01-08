@@ -1,5 +1,5 @@
 <button *ngIf="accService.isLoggedIn()" id="create-post" (click)="openDialog()" mat-button>Create Post</button>
 
 <div *ngFor="let message of allMessages">
-    <app-post [username]="'Anonymous'" [message]="message.text"></app-post>
+    <app-post (deleteEvent)="deletePost($event)" [id]="message._id" [username]="message.createdBy.username" [message]="message.text" [date]="message.timestamp"></app-post>
 </div>

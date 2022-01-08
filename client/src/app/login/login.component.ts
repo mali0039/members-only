@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
       this.accService.logIn(this.user.value).subscribe((res:any) => {
         if (res['success']) {
           this.accService.setUsername(this.user.get("username")?.value)
+          this.accService.setRole(res['status']);
           this.router.navigate(['/'])
         }
         else {
