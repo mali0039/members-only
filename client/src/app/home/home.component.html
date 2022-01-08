@@ -1,6 +1,7 @@
-<h2 *ngIf="statusChanged" id="status-update">Status Changed: Member</h2>
-
+<h2 *ngIf="statusChanged" class="centered">{{statusMessage}}</h2>
 <button *ngIf="accService.isLoggedIn()" id="create-post" (click)="openDialog()" mat-button>Create Post</button>
+<h2 class="centered" *ngIf="this.allMessages.length == 0">No messages</h2>
+
 <div *ngFor="let message of allMessages">
     <app-post (deleteEvent)="deletePost($event)" [id]="message._id" [username]="message.createdBy.username" [message]="message.text" [date]="message.timestamp"></app-post>
 </div>

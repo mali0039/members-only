@@ -50,13 +50,11 @@ passport.use(
         bcrypt.compare(password, user.password, (err, res) => {
             if (res) {
               // passwords match! log user in
-              console.log("Success")
               return done(null, user)
 
             } else {
               // passwords do not match!
-              console.log("hashed password" + password)
-              console.log("normal: " + user.password)
+
               return done(null, false, { message: "Incorrect password" })
             }
         })  
@@ -118,7 +116,6 @@ app.post("/api/sign-up", (req, res, next) => {
 app.get('/api/messages', (req,res,next) => {
   Post.find().populate("createdBy", "username").exec((err, posts) => {
     if (err) return next(err);
-    console.log(req.query.status)
     if (req.query.status == 'noob' || req.query.status == "") {
       posts.forEach((post) => {
         post.createdBy.username = "Anonymous"
@@ -129,7 +126,10 @@ app.get('/api/messages', (req,res,next) => {
   })
 })  
 app.post('/api/message', (req,res,next) => {
+  console.log("test")
   User.findOne({username: req.body.username}, (err,user) => {
+    console.log(req.body.username)
+    console.log(user)
     if (err) return next(err)
       if (user) {
         const post = new Post({
@@ -151,8 +151,6 @@ app.post('/api/log-in',
   });
 
   app.delete('/api/message', (req,res, next) => {
-    console.log("hit delete")
-    console.log(req.body.id)
     Post.deleteOne({_id: req.body.id}, (err, result) => {
       if (err) return next(err)
       res.status(200).json({success: true, result})
@@ -160,7 +158,6 @@ app.post('/api/log-in',
   })
 app.post("/api/log-out", (req, res) => {
     req.logout();
-    console.log("logging out")
     res.status(205)
 });
 app.post("/api/member", (req,res,next) => {

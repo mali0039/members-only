@@ -15,6 +15,7 @@ export interface DialogData {
 })
 export class HomeComponent implements OnInit {
   message!: string;
+  statusMessage = "Membership status changed: Member"
   statusChanged = false;
   allMessages!: any
   constructor(public dialog: MatDialog, private messageService: MessageService, public accService: AccountService) { }
@@ -41,13 +42,21 @@ export class HomeComponent implements OnInit {
     console.log(this.allMessages)
   }
   becomeMember() {
-    this.accService.changeMembership(localStorage.getItem("user") || "").subscribe((res) => {
-      console.log("Membership changed.")
-      localStorage.setItem('role', 'member');
-      this.getMessages();
+    if (localStorage.getItem('role') == 'noob') {
+      this.accService.changeMembership(localStorage.getItem("user") || "").subscribe((res) => {
+        console.log("Membership changed.")
+        localStorage.setItem('role', 'member');
+        this.getMessages();
+        this.statusChanged = true;
+        setTimeout((() => this.statusChanged = false), 3000);
+      })
+    }
+    else {
+      this.statusMessage = "Unavailable. You are a/an " + localStorage.getItem("role");
       this.statusChanged = true;
       setTimeout((() => this.statusChanged = false), 3000);
-    })
+    }
+    
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(MessageDialog, {

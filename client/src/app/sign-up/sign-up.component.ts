@@ -28,8 +28,7 @@ export class SignUpComponent implements OnInit {
     if (this.user.valid) {
       this.accService.signUp(this.user.value).subscribe((res:any) => {
         if (res['success']) {
-          localStorage.setItem('user', (this.user.get('username')?.toString() || ""));
-          this.router.navigate(['/'])
+          this.router.navigate(['/login'])
         }
         else {
           console.log(res)
