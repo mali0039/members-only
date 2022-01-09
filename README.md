@@ -5,7 +5,7 @@ An anonymous messaging board for only the most secret secrets.
 Created using NodeJS, Angular, and MongoDB.
 
 
-## Home Page
+## Home Page (Non-member view)
 ![Home Page](https://i.imgur.com/WsJvSbQ.png)
 
 
@@ -17,3 +17,6 @@ Created using NodeJS, Angular, and MongoDB.
 
 ## Member View
 ![](https://i.imgur.com/5oDIOU6.png)
+
+## Admin View
+![](https://i.imgur.com/gFKsmGx.png)
