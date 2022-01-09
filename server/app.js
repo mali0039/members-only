@@ -23,6 +23,7 @@ db.on("error", console.error.bind(console, "mongo connection error"));
 
 const app = express();
 
+app.use(express.static('members-only'))
 
 app.use(session({ secret: secret, resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
@@ -46,6 +47,10 @@ app.post("/api/member", (req,res,next) => {
     if (err) return next(err);
     res.status(204).json({success: true, status: "updated"})
   })
+})
+
+app.get("*", (req,res) => {
+  res.redirect('/')
 })
 const PORT = process.env.PORT || 3000
 app.listen((PORT), () => console.log("app listening on port " + PORT));
