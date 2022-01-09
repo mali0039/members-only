@@ -11,3 +11,6 @@ Created using NodeJS, Angular, and MongoDB.
 ## Login Page
 ![](https://i.imgur.com/Tz9mwHM.png)
 
+## Signup Page
+![](https://i.imgur.com/gnT7wA7.png)
+
