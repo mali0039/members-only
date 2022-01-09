@@ -9,10 +9,10 @@ export class AccountService {
   prefixURL = "/api"
   constructor(private http: HttpClient, private router: Router) { }
   signUp(credentials: Object) {
-    return this.http.post(this.prefixURL + "/sign-up", credentials).pipe(catchError(this.handleError));
+    return this.http.post(this.prefixURL + "/signup", credentials).pipe(catchError(this.handleError));
   }
   logIn(credentials: Object) {
-    return this.http.post(this.prefixURL + "/log-in", credentials).pipe(catchError(this.handleError));;
+    return this.http.post(this.prefixURL + "/login", credentials).pipe(catchError(this.handleError));;
   }
   isLoggedIn() {
     return (localStorage.getItem("user") ? true : false)
@@ -20,14 +20,13 @@ export class AccountService {
   logOut() {
     localStorage.removeItem("user");
     localStorage.removeItem("role");
-    console.log("logging out")
-    return this.http.post(this.prefixURL + "/log-out", {}).pipe(catchError(this.handleError));;
+    return this.http.post(this.prefixURL + "/logout", {}).pipe(catchError(this.handleError));;
   }
   setUsername(username: string) {
     localStorage.setItem("user", username)
   }
   setRole(role: string) {
-    console.log(role);
+
     localStorage.setItem("role", role);
   }
   changeMembership(user: string) {

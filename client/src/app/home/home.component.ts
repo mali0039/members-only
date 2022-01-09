@@ -25,10 +25,9 @@ export class HomeComponent implements OnInit {
   }
   getMessages() {
     this.messageService.getMessages().subscribe((res:any) => {
-      console.log(res)
       res.messages.forEach((message:any) => {
         let date = new Date(message.timestamp)
-        console.log(date.toLocaleDateString())
+
         message.timestamp = date.toLocaleDateString() + " - " + date.toLocaleTimeString()
       })
       this.allMessages = res.messages
@@ -36,15 +35,13 @@ export class HomeComponent implements OnInit {
   }
   deletePost(event:String) {
     let index = this.allMessages.findIndex((ele:any) => ele._id == event)
-    console.log(index)
-    console.log(this.allMessages)
+  
     this.allMessages.splice(index, 1)
-    console.log(this.allMessages)
   }
   becomeMember() {
     if (localStorage.getItem('role') == 'noob') {
       this.accService.changeMembership(localStorage.getItem("user") || "").subscribe((res) => {
-        console.log("Membership changed.")
+
         localStorage.setItem('role', 'member');
         this.getMessages();
         this.statusChanged = true;
@@ -65,7 +62,7 @@ export class HomeComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+
 
       this.message = result;
       if (this.accService.isLoggedIn() && this.message) {
@@ -74,7 +71,6 @@ export class HomeComponent implements OnInit {
           let date = new Date(res.post.timestamp)
           res.post.timestamp = date.toLocaleDateString() + " - " + date.toLocaleTimeString()
           this.allMessages.push(res.post)
-          console.log(res.post)
         })
       }
       this.message = ""

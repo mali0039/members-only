@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
           this.errorMessage = "Invalid username or password."
           this.notValid = true;
         }
-        console.log(err.status)
+
       }))
     }
     else {

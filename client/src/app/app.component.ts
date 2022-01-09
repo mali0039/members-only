@@ -12,7 +12,6 @@ export class AppComponent {
 
   logOut() {
     this.accService.logOut().subscribe((res) => {
-      console.log(res)
     })
   }
 }

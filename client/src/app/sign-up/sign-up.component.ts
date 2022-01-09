@@ -31,7 +31,7 @@ export class SignUpComponent implements OnInit {
           this.router.navigate(['/login'])
         }
         else {
-          console.log(res)
+
           this.notValid = true;
         }
       }, (err) => {
@@ -41,7 +41,7 @@ export class SignUpComponent implements OnInit {
     }
     else {
       this.notValid = true;
-      console.log("EE")
+
     }
     
   }

@@ -23,7 +23,7 @@ export class PostComponent implements OnInit {
     this.messageService.deleteMessage(this.id).subscribe((res:any) => {
       if (res['success'] == true) {
         this.deleteEvent.emit(this.id);
-        console.log("Post: " + this.id + " was deleted")
+
       }
      
     })
