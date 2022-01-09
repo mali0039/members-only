@@ -2,9 +2,10 @@
 
 const express = require("express");
 const path = require("path");
-const session = require("express-session");
+const session = require("cookie-session");
 const passport = require("passport");
-
+const compression = require('compression');
+const helmet = require('helmet');
 const mongoose = require("mongoose");
 
 require("dotenv").config()
@@ -23,9 +24,16 @@ db.on("error", console.error.bind(console, "mongo connection error"));
 
 const app = express();
 
-app.use(express.static('members-only'))
+app.use(compression())
+app.use(express.static('dist/members-only'))
+app.use(helmet());
+app.use(session({ 
+  name: 'session',
+  keys: [secret],
 
-app.use(session({ secret: secret, resave: false, saveUninitialized: true }));
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+ }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
@@ -52,7 +60,7 @@ app.post("/api/member", (req,res,next) => {
 app.get("*", (req,res) => {
   res.redirect('/')
 })
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3001
 app.listen((PORT), () => console.log("app listening on port " + PORT));
 
 module.exports = app;
