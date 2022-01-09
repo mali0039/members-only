@@ -1,4 +1,4 @@
-# members-only
+# Members Only
 
 An anonymous messaging board for only the most secret secrets.
 
