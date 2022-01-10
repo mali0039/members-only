@@ -4,6 +4,8 @@ An anonymous messaging board for only the most secret secrets.
 
 Created using NodeJS, Angular, and MongoDB.
 
+Live: https://polar-taiga-62969.herokuapp.com/home
+
 
 ## Home Page (Non-member view)
 - Names are anonymous
